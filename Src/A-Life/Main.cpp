@@ -1,4 +1,6 @@
 #include "Cells.h"
+#include "CA.h"
+#include "GameOfLife.h"
 #include "Renderer.h"
 #include "Texture.h"
 
@@ -20,7 +22,7 @@ int main(int, char**)
 	std::shared_ptr<Texture> texture = std::make_unique<Texture>(env_size.x, env_size.y, renderer);
 
 	// create environment
-	std::unique_ptr<Environment> env = std::make_unique<Cells>(env_size.x, env_size.y, texture);
+	std::unique_ptr<Environment> env = std::make_unique<GameOfLife>(env_size.x, env_size.y, texture);
 	env->Initialize();
 
 	bool quit = false;
@@ -55,7 +57,14 @@ int main(int, char**)
 
 		// update environment
 		env->Step();
+		
+		// debug: 
+		std::cout << "Step completed." << std::endl;
+
+		// copy environment to texture
 		texture->Copy(env->GetColorBuffer());
+		std::cout << "Texture copied." << std::endl;
+		
 
 		renderer.RenderCopy(texture);
 		renderer.Present();
