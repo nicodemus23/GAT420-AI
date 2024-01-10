@@ -11,7 +11,7 @@
 int main(int, char**)
 {
 	glm::ivec2 screen_size{ 800, 600 };
-	glm::ivec2 env_size{ 40, 30 };
+	glm::ivec2 env_size{ 80, 60 };
 
 	// create renderer
 	Renderer renderer;
@@ -24,6 +24,7 @@ int main(int, char**)
 	// create environment
 	std::unique_ptr<Environment> env = std::make_unique<GameOfLife>(env_size.x, env_size.y, texture);
 	env->Initialize();
+
 
 	bool quit = false;
 	while (!quit)
@@ -54,7 +55,6 @@ int main(int, char**)
 			env->MouseButtonUp(event.button.button);
 			break;
 		}
-
 		// update environment
 		env->Step();
 		

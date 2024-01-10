@@ -10,6 +10,7 @@ public:
 	bool Initialize() override;
 	void Step() override;
 	void KeyDown(SDL_Keycode keycode) override;
+	void TestOnRandom();
 
 protected:
 	int frame{ 0 };
